@@ -1,0 +1,19 @@
+overwrite: true
+schema: 
+  - ${HYGRAPH_ENDPOINT}:
+      headers:
+        Authorization: Bearer ${HYGRAPH_TOKEN}
+documents: "src/lib/queries/*.graphql"
+generates:
+  src/types/generated.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-graphql-request"
+    config:
+      rawRequest: false
+      inlineFragmentTypes: combine
+      skipTypename: false
+      exportFragmentSpreadSubTypes: true
+      dedupeFragments: true
+      preResolveTypes: true
